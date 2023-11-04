@@ -1,0 +1,2 @@
+# ohtu_syksy23_palautus
+Ohjelmistotuotantokurssin palautusrepo
