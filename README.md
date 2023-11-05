@@ -1,2 +1,3 @@
 # ohtu_syksy23_palautus
-Ohjelmistotuotantokurssin palautusrepo
+
+https://github.com/aihyytiainen/ohtuvarasto
