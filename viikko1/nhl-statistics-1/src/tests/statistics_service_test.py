@@ -28,3 +28,8 @@ class TestStatisticsService(unittest.TestCase):
     def test_team(self):
        players = self.stats.team("EDM")
        self.assertEqual(players[0].team, "EDM")
+
+    def test_top(self):
+       players = self.stats.top(3)
+       self.assertEqual(players[0].name, "Gretzky")
+       self.assertEqual(len(players), 3)
