@@ -1,5 +1,5 @@
 from entities.user import User
-
+import re
 
 class UserInputError(Exception):
     pass
@@ -36,5 +36,11 @@ class UserService:
     def validate(self, username, password):
         if not username or not password:
             raise UserInputError("Username and password are required")
-
-        # toteuta loput tarkastukset tänne ja nosta virhe virhetilanteissa
+        if len(username) < 3:
+            raise UserInputError("Username minimun length is 3 letters")
+        if not re.match("^[a-z]+$", username):
+            raise UserInputError("Username shall contain only letters from a to z")
+        if len(password) < 8:
+            raise UserInputError("Password minimun length is 8 characters")
+        if re.match("^[a-zA-Z]+$", password):
+            raise UserInputError("Password can not be only letters")
