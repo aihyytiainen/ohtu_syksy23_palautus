@@ -38,7 +38,31 @@ Register With Nonmatching Password And Password Confirmation
     Submit Credentials
     Register Should Fail With Message  Password and confirmation do not match
 
+Login After Successful Registration
+    Go To Register Page
+    Set Username  kekkee
+    Set Password  ruusi12345
+    Set Password Confirmation  ruusi12345
+    Submit Credentials
+    Go To Login Page
+    Set Username  kekkee
+    Set Password  ruusi12345
+    Submit Login
+    Login Should Succeed
 
+
+Login After Failed Registration
+    Go To Register Page
+    Set Username  jeepiooo
+    Set Password  jeepiopio
+    Set Password Confirmation  jeepiopio
+    Submit Credentials
+    Register Should Fail With Message  Password can not be only letters
+    Go To Login Page
+    Set Username  jeepiooo
+    Set Password  jeepiopio
+    Submit Login
+    Login Should Fail With Message  Invalid username or password
 
 *** Keywords ***
 Login Should Succeed
@@ -55,6 +79,9 @@ Register Should Fail With Message
 
 Submit Credentials
     Click Button  Register
+
+Submit Login
+    Click Button  Login
 
 Set Username
     [Arguments]  ${username}
