@@ -244,3 +244,32 @@ class TestKauppa(unittest.TestCase):
         kauppa.tilimaksu("matti", "0123456")
 
         self.assertEqual(viitegeneraattori_mock.uusi.call_count, 3)
+
+    def test_tuote_poistuu_varastosta_ostoskoriin(self):
+
+        pankki_mock = Mock()
+        viitegeneraattori_mock = Mock(wraps=Viitegeneraattori())
+
+        kirjanpito_mock = Mock()
+        varasto_mock = Mock(wraps=Varasto(kirjanpito_mock))
+
+        kauppa = Kauppa(varasto_mock, pankki_mock, viitegeneraattori_mock)
+
+        kauppa.aloita_asiointi()
+        kauppa.lisaa_koriin(1)
+        self.assertEqual(varasto_mock.saldo(1), 99)
+
+    def test_poista_tuote_ostoskorista(self):
+
+        pankki_mock = Mock()
+        viitegeneraattori_mock = Mock(wraps=Viitegeneraattori())
+
+        kirjanpito_mock = Mock()
+        varasto_mock = Mock(wraps=Varasto(kirjanpito_mock))
+
+        kauppa = Kauppa(varasto_mock, pankki_mock, viitegeneraattori_mock)
+
+        kauppa.aloita_asiointi()
+        kauppa.lisaa_koriin(1)
+        kauppa.poista_korista(1)
+        self.assertEqual(varasto_mock.saldo(1), 100)
