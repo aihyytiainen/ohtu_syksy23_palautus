@@ -1,6 +1,7 @@
 class Sovelluslogiikka:
     def __init__(self, arvo=0):
         self._arvo = arvo
+        self._musiti = arvo
 
     def miinus(self, operandi):
         self._arvo = self._arvo - operandi
@@ -16,3 +17,11 @@ class Sovelluslogiikka:
 
     def arvo(self):
         return self._arvo
+
+#class Summa:
+#    def __init__(self, sovelluslogiikka, syote):
+#       self.sovelluslogiikka = sovelluslogiikka
+#       self.syote = syote
+
+#    def suorita(self):
+#       return self.suovelluslogiikka.arvo() + self.syote
