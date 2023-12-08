@@ -57,11 +57,27 @@ class All:
         return True
 
 class Or:
-     def __init__(self, *matchers):
+    def __init__(self, *matchers):
         self._matchers = matchers
 
-     def test(self, player):
+    def test(self, player):
         for matcher in self._matchers:
             if matcher.test(player):
                 return True
         return False
+
+class QueryBuilder:
+    def __init__(self, query = All()):
+        self.query_entity = query
+
+    def build(self):
+        return self.query_entity
+
+    def playsIn(self, team):
+        return QueryBuilder(And(PlaysIn(team), self.query_entity))
+
+    def hasAtLeast(self, value, attr):
+        return QueryBuilder(And(HasAtLeast(value,attr), self.query_entity))
+
+    def hasFewerThan(self, value, attr):
+        return QueryBuilder(And(HasFewerThan(value,attr), self.query_entity))
