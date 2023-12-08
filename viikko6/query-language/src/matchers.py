@@ -81,3 +81,6 @@ class QueryBuilder:
 
     def hasFewerThan(self, value, attr):
         return QueryBuilder(And(HasFewerThan(value,attr), self.query_entity))
+
+    def oneOf(self, *queries):
+        return QueryBuilder(Or(*queries))
